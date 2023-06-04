@@ -1,4 +1,4 @@
-package carsniffer;
+package carsniffer.server;
 
 public interface InputConverter {
 

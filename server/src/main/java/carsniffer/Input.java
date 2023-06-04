@@ -1,4 +1,0 @@
-package carsniffer;
-
-record Input() {
-}
