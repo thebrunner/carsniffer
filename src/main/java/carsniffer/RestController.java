@@ -11,9 +11,8 @@ public class RestController {
 	@PostMapping("/tutorials")
 	public ResponseEntity<Void> getAllTutorials(@RequestParam byte[] input) {
 		try {
-			
-
-			return new ResponseEntity<>(HttpStatus.OK);
+	
+		return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
