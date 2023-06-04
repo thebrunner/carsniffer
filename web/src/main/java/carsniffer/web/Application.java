@@ -1,14 +1,23 @@
 package carsniffer.web;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
-@SpringBootConfiguration
-public class Application extends SpringBootServletInitializer {
+import carsniffer.can.CANInputConverter;
+import carsniffer.can.CANStorage;
+import carsniffer.server.Server;
+
+@SpringBootApplication
+public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+	}
+
+	@Bean
+	public Server server() {
+		return new Server(new CANInputConverter(), new CANStorage());
 	}
 
 }
