@@ -1,0 +1,10 @@
+package carsniffer.inputconverter;
+
+@Service
+public class DummyInputConverter implements InputConverter {
+  
+  public Input convert(byte[] input) {
+    return new Input();
+  }
+  
+}
