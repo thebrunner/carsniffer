@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import carsniffer.can.CANInputConverter;
-import carsniffer.can.CANStorage;
 import carsniffer.server.Server;
+import carsniffer.storage.DummyStorage;
 
 @SpringBootApplication
 public class Application {
@@ -17,7 +17,7 @@ public class Application {
 
 	@Bean
 	public Server server() {
-		return new Server(new CANInputConverter(), new CANStorage());
+		return new Server(new CANInputConverter(), new DummyStorage());
 	}
 
 }

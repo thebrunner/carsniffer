@@ -11,6 +11,7 @@
 	<modules>
 		<module>server</module>
 		<module>can</module>
+		<module>storage</module>
 		<module>web</module>
 	</modules>
 
