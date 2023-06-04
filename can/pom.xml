@@ -3,16 +3,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>carsniffer</groupId>
-	<artifactId>root</artifactId>
-	<packaging>pom</packaging>
-	<version>0.1-SNAPSHOT</version>
+	<parent>
+		<groupId>carsniffer</groupId>
+		<artifactId>root</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>can</artifactId>
+	<packaging>jar</packaging>
 
-	<modules>
-		<module>server</module>
-		<module>can</module>
-		<module>web</module>
-	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>carsniffer</groupId>
+			<artifactId>server</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

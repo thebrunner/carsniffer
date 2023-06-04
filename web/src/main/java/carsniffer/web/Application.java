@@ -1,4 +1,4 @@
-package carsniffer;
+package carsniffer.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
