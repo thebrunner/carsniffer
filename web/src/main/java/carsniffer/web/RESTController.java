@@ -18,19 +18,23 @@ public class RESTController {
 	private Server server;
 
 	@PostMapping("/receive")
-	public ResponseEntity<Void> receive(boolean[] rawInput) {
+	public ResponseEntity<?> receive(boolean[] rawInput) {
+		try {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Receiving: " + rawInput);
+			}
 
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Receiving: " + rawInput);
+			server.receive(rawInput);
+
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Successfully converting " + rawInput);
+			}
+
+			return ResponseEntity.ok(null);
+		} catch (Throwable t) {
+			LOGGER.error("", t);
+			return ResponseEntity.internalServerError().body(t);
 		}
-
-		server.receive(rawInput);
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Successfully converting " + rawInput);
-		}
-
-		return ResponseEntity.ok(null);
 	}
 
 }

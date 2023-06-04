@@ -24,7 +24,7 @@ class ServerTest {
 	Server server;
 	
 	@Test
-	void testReceive() {
+	void testReceive() throws Exception {
 		var b = new boolean[] {true, false};
 		var o = new Object();
 		var input = new Input(b, o);
