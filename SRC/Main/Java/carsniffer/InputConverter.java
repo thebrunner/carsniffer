@@ -1,4 +1,8 @@
 package carsniffer;
 
-public void receive(byte[] input) {
+public class InputConverter {
+  
+  public void receive(byte[] input) {
+  }
+  
 }
