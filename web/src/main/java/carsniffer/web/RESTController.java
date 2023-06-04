@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import carsniffer.server.Boolean2RAWInputConverter;
 import carsniffer.server.Server;
 
 @RestController
@@ -17,20 +16,18 @@ public class RESTController {
 
 	@Autowired
 	private Server server;
-	
-	private final Boolean2RAWInputConverter bitSetConverter = new Boolean2RAWInputConverter();
 
 	@PostMapping("/receive")
-	public ResponseEntity<Void> receive(boolean[] booleanInput) {
+	public ResponseEntity<Void> receive(boolean[] rawInput) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Receiving: " + booleanInput);
+			LOGGER.debug("Receiving: " + rawInput);
 		}
 
-		server.receive(bitSetConverter.convert(booleanInput));
+		server.receive(rawInput);
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Successfully converting " + booleanInput);
+			LOGGER.debug("Successfully converting " + rawInput);
 		}
 
 		return ResponseEntity.ok(null);

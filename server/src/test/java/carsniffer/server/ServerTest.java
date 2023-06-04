@@ -25,7 +25,7 @@ class ServerTest {
 	
 	@Test
 	void testReceive() {
-		var b = new RAWInput(null, 0);
+		var b = new boolean[] {true, false};
 		var o = new Object();
 		var input = new Input(b, o);
 		

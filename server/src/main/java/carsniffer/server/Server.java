@@ -11,7 +11,7 @@ public class Server {
 		this.storage = storage;
 	}
 
-	public void receive(RAWInput rawInput) {
+	public void receive(boolean[] rawInput) {
 		
 		final var input = inputConverter.convert(rawInput);
 		
