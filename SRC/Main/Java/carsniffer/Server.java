@@ -1,8 +1,13 @@
 package carsniffer;
 
+@Service
 public class Server {
   
-  public void receive(byte[] input) {
+  @Autowire
+  private InputConverter inputConverter;
+  
+  public void receive(byte[] arrayInput) {
+    final var input = inputConverter.convert(arrayInput);
   }
   
 }
