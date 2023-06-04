@@ -1,7 +1,7 @@
 package carsniffer;
 
 public interface InputConverter {
-  
-  Input convert(byte[] input);
-  
+
+	Input convert(byte[] input);
+
 }
