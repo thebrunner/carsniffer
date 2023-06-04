@@ -1,5 +1,7 @@
 package carsniffer.can;
 
-public record RAWCANMessage(boolean[] identifier, boolean[] data, boolean[] crc, boolean[] ack) {
+import carsniffer.server.RAWInput;
+
+public record RAWCANMessage(RAWInput identifier, RAWInput data, RAWInput crc, RAWInput ack) {
 
 }

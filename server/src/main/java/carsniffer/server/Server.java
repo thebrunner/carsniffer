@@ -11,7 +11,7 @@ public class Server {
 		this.storage = storage;
 	}
 
-	public void receive(boolean[] rawInput) throws CarSnifferException {
+	public void receive(RAWInput rawInput) throws CarSnifferException {
 		
 		final var input = inputConverter.convert(rawInput);
 		

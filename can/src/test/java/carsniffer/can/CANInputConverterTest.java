@@ -1,56 +1,40 @@
 package carsniffer.can;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.BitSet;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+
+import carsniffer.server.RAWInput;
 
 class CANInputConverterTest {
 
 	private CANInputConverter canInputConverter = new CANInputConverter();
-
+	
 	@Test
 	void testconvert2RAWCANMessage() throws Exception {
-		var input = new boolean[] { // Identifier 11
-				false, false, false, false, false, //
-				false, false, false, true, false, false, // == 4
-				// Data (2)
-				true, true, // == 3
-				// CRC 16
-				false, false, false, false, false, //
-				false, false, false, false, false, //
-				false, false, false, false, true, false, // == 2
-				// Ack 2
-				false, true // == 1
-		};
-
-		final var result = canInputConverter.convert2RAWCANMessage(input);
-
+		var raw = new BitSet(11+2+16+2);
+		raw.set(8); // == 4
+		
+		raw.set(0+11);
+		raw.set(1+11); // == 3
+		
+		raw.set(14+2+11); // 2
+		
+		raw.set(1+16+2+11); // 1
+		
+		final var result = canInputConverter.convert2RAWCANMessage(new RAWInput(raw, 11+2+16+2));
+		
 		assertNotNull(result);
-		assertEquals(11, result.identifier().length);
-		for (int i = 0; i < 8; i++) {
-			assertFalse(result.identifier()[i]);
-		}
-		assertTrue(result.identifier()[8]);
-		assertFalse(result.identifier()[9]);
-		assertFalse(result.identifier()[10]);
-		
-		assertEquals(2, result.data().length);
-		assertTrue(result.data()[0]);
-		assertTrue(result.data()[1]);
-		
-
-		assertEquals(16, result.crc().length);
-		for (int i = 0; i < 14; i++) {
-			assertFalse(result.crc()[i]);
-		}
-		assertTrue(result.crc()[14]);
-		assertFalse(result.crc()[15]);
-		
-		assertEquals(2, result.ack().length);
-		assertFalse(result.ack()[0]);
-		assertTrue(result.ack()[1]);
+		assertEquals(11, result.identifier().length());
+		assertEquals("{8}", result.identifier().raw().toString());
+		assertEquals(2, result.data().length());
+		assertEquals("{0, 1}", result.data().raw().toString());
+		assertEquals(16, result.crc().length());
+		assertEquals("{14}", result.crc().raw().toString());
+		assertEquals(2, result.ack().length());
+		assertEquals("{1}", result.ack().raw().toString());
 	}
 }

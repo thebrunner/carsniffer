@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import carsniffer.server.RAWInputConverter;
 import carsniffer.server.Server;
 
 @RestController
@@ -16,15 +17,17 @@ public class RESTController {
 
 	@Autowired
 	private Server server;
+	
+	private RAWInputConverter inputConverter = new RAWInputConverter();
 
 	@PostMapping("/receive")
-	public ResponseEntity<?> receive(boolean[] rawInput) {
+	public ResponseEntity<?> receive(byte[] rawInput) {
 		try {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Receiving: " + rawInput);
 			}
 
-			server.receive(rawInput);
+			server.receive(inputConverter.convert(rawInput));
 
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Successfully converting " + rawInput);

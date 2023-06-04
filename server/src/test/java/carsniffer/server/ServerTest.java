@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.BitSet;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -25,7 +27,7 @@ class ServerTest {
 	
 	@Test
 	void testReceive() throws Exception {
-		var b = new boolean[] {true, false};
+		var b = new RAWInput(new BitSet(), 0);
 		var o = new Object();
 		var input = new Input(b, o);
 		
