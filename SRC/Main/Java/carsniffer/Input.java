@@ -1,0 +1,4 @@
+package carsniffer;
+
+record Input() {
+}
