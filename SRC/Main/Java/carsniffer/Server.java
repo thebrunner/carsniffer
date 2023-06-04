@@ -1,4 +1,4 @@
 package carsniffer;
 
-public void receive() {
+public void receive(byte[] input) {
 }
