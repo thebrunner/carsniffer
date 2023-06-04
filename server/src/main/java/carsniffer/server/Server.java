@@ -11,9 +11,9 @@ public class Server {
 		this.storage = storage;
 	}
 
-	public void receive(byte[] arrayInput) {
+	public void receive(RAWInput rawInput) {
 		
-		final var input = inputConverter.convert(arrayInput);
+		final var input = inputConverter.convert(rawInput);
 		
 		storage.store(input);
 	}

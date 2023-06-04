@@ -1,4 +1,4 @@
 package carsniffer.server;
 
-public record Input(byte[] raw, Object converted) {
+public record Input(RAWInput raw, Object converted) {
 }

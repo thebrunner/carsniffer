@@ -25,8 +25,8 @@ class ServerTest {
 	
 	@Test
 	void testReceive() {
-		byte[] b = new byte[] {1};
-		Object o = new Object();
+		var b = new RAWInput(null, 0);
+		var o = new Object();
 		var input = new Input(b, o);
 		
 		when(inputConverter.convert(b)).thenReturn(input);
