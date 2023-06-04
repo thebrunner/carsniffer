@@ -1,10 +1,12 @@
 package carsniffer.server;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,13 +26,22 @@ class ServerTest {
 	@Test
 	void testReceive() {
 		byte[] b = new byte[] {1};
+		Object o = new Object();
+		var input = new Input(b, o);
 		
-		var input = new Input();
 		when(inputConverter.convert(b)).thenReturn(input);
+		
+		ArgumentCaptor<Input> inputArg = ArgumentCaptor.forClass(Input.class);
 		
 		server.receive(b);
 	
-		verify(storage).store(input);
+		verify(storage).store(inputArg.capture());
+		
+		Input result = inputArg.getValue();
+		
+		assertEquals(input, result);
+		assertEquals(b, result.raw());
+		assertEquals(o, result.converted());
 	}
 
 }
