@@ -1,9 +1,0 @@
-package carsniffer.storage;
-
-@Service
-public interface DummyStorage {
-  
-  public void store(Input input) {
-  }
-  
-}
