@@ -37,7 +37,7 @@ public class CANBaseFrameConverter {
 		removeStuff(crc, 16 - 3, 16);
 
 		final var startAck = endCrc + 1; // delimiter
-		final var endAck = startCrc + 1;
+		final var endAck = startAck + 1;
 		final var ack = rawInput.raw().get(startAck, endAck);
 
 		return RAWCANMessage.ofBaseFrame(identifier, data, crc, ack, rawInput.arrival());
