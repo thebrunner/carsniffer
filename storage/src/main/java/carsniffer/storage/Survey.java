@@ -1,99 +1,40 @@
 package carsniffer.storage;
 
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 @Entity
-
 @Table(name = "survey")
-
 public class Survey implements Serializable {
 
-    private Long _id;
+	private Long pk;
 
-    private String _name;
+	private String _name;
 
-    private List<Question> _questions;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "pk", unique = true, nullable = false)
+	public Long getPk() {
+		return this.pk;
+	}
 
-    /**
-
-     * @return survey's id.
-
-     */
-
-    @Id
-
-    @GeneratedValue(strategy = IDENTITY)
-
-    @Column(name = "survey_id", unique = true, nullable = false)
-
-    public Long getId() {
-
-        return _id;
-
-    }
-
-    /**
-
-     * @return the survey name.
-
-     */
-
-    @Column(name = "name")
-
-    public String getName() {
-
-        return _name;
-
-    }
-
-    /**
-
-     * @return a list of survey questions.
-
-     */
-
-    @OneToMany(mappedBy = "survey")
-
-    @OrderBy("id")
-
-    public List<Question> getQuestions() {
-
-        return _questions;
-
-    }
-
-    /**
-
-     * @param id the id to set to.
-
-     */
-
-    public void setId(Long id) {
-
-        _id = id;
-
-    }
-
-    /**
-
-     * @param name the name for the question.
-
-     */
-
-    public void setName(final String name) {
-
-        _name = name;
-
-    }
-
-    /**
-
-     * @param questions list of questions to set.
-
-     */
-
-    public void setQuestions(List<Question> questions) {
-
-        _questions = questions;
-
-    }
+	public void setPk(Long pk) {
+		this.pk = pk;
+	}
+	
+	@Column(name = "name")
+	public String getName() {
+		return this._name;
+	}
+	
+	public void setName(final String name) {
+		this._name = name;
+	}
 
 }
