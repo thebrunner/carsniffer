@@ -9,14 +9,19 @@ import carsniffer.server.RAWInputConverter;
 public class CANInputConverter implements InputConverter {
 
 	private final CANBaseFrameConverter baseFrameConverter = new CANBaseFrameConverter();
+	private final CANExtendedFrameConverter extendedFrameConverter = new CANExtendedFrameConverter();
 	
 	@Override
 	public Input convert(RAWInput rawInput) throws CarSnifferException {
 
-		final var rawCAN = baseFrameConverter.convert(rawInput);
+		final boolean isExtendedFrame = rawInput.raw().get(14); --to boolean
+				   
+		final var rawCAN = isExtendedFrame ? extendedFrameConverter.convert(rawInput)
+			: baseFrameConverter.convert(rawInput);
 
 		return new Input(rawInput, new CANMessage(rawCAN, //
 				convertIdentifier(rawCAN.identifier()), //
+				convertIdentifier(rawCAN.extendedIdentifier()), //
 				convertData(rawCAN.data()), //
 				convertCrc(rawCAN.crc()), //
 				convertAck(rawCAN.ack()) //
