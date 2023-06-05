@@ -14,6 +14,9 @@ public class RAWInputConverter {
 	}
 	
 	public static String bitSet2String(BitSet rawInput, int length) {
+		if (rawInput == null) {
+			return null;
+		}
 		String rawInputString = "";
 		for (int i = 0; i < length-1; i++) {
 			rawInputString += rawInput.get(i) ? "1" : "0";

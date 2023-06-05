@@ -17,7 +17,6 @@ public class JpaInput implements Serializable {
 	private Long pk;
 
 	private String raw;
-	private String converted;
 	private String identifier;
 	private String extendedIdentifier;
 	private String data;
@@ -43,15 +42,6 @@ public class JpaInput implements Serializable {
 	
 	public void setRaw(final String raw) {
 		this.raw = raw;
-	}
-
-	@Column(name = "converted", length = 8000)
-	public String getConverted() {
-		return converted;
-	}
-
-	public void setConverted(String converted) {
-		this.converted = converted;
 	}
 	
 	@Column(name = "identifier")
