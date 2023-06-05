@@ -38,20 +38,34 @@ public class CANInputConverter implements InputConverter {
 	}
 
 	public RAWCANMessage convert2RAWCANMessage(RAWInput rawInput) throws CarSnifferException {
-
+// BASE FRAME CAN A / CAN B
+		
+		final var startControl = 1;
+		final var endControl = 12;
+		final var control = rawInput.raw().get(startControl, endControl);
+		final int controlLength = 4711; // controlToInt == length data
+		
 		if (rawInput.length() < 11 + 16 + 2) {
 			throw new CarSnifferException(rawInput, "Input to short: length " + rawInput.length());
 		}
 
-		final var endAck = rawInput.length();
-		final var startAck = endAck - 2; // 2 bit
-		final var endCrc = startAck;
-		final var startCrc = endCrc - 16; // 16 Bit
-		final var endData = startCrc;
+		final var startIdentifier = 1;
+		final var endIdentifier = 12;
+		final var identifier = rawInput.raw().get(startIdentifier, endIdentifier);
 
+		final var startData = startCrc;
+		final var endData = startCrc;
+		final var data = rawInput.raw().get(11, endData);
+
+		final var startCrc = endCrc - 16; // 16 Bit
+		final var endCrc = startAck;
+		
+		final var startAck = endAck - 2; // 1 bit
+		final var endAck = rawInput.length();
+		
 		return new RAWCANMessage( //
-				new RAWInput(rawInput.raw().get(0, 11), 11), //
-				new RAWInput(rawInput.raw().get(11, endData), rawInput.length() - 11 - 16 - 2), //
+				new RAWInput(identifier, 11), //
+				new RAWInput(data, rawInput.length() - 11 - 16 - 2), //
 				new RAWInput(rawInput.raw().get(startCrc, endCrc), 16), //
 				new RAWInput(rawInput.raw().get(startAck, endAck), 2) //
 		);
