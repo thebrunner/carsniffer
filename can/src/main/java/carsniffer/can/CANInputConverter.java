@@ -46,7 +46,7 @@ public class CANInputConverter implements InputConverter {
 		return RAWInputConverter.bitSet2String(crc, 15);
 	}
 
-	public String convertAck(BitSet ack) {
-		return RAWInputConverter.bitSet2String(ack, 1);
+	public boolean convertAck(BitSet ack) {
+		return ack.get(0);
 	}
 }

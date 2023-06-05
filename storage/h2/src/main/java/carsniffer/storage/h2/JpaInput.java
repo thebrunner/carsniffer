@@ -21,7 +21,7 @@ public class JpaInput implements Serializable {
 	private String extendedIdentifier;
 	private String data;
 	private String crc;
-	private String ack;
+	private boolean ack;
 	private Timestamp arrival;
 
 	@Id
@@ -81,11 +81,11 @@ public class JpaInput implements Serializable {
 	}
 	
 	@Column(name = "ack")
-	public String getAck() {
+	public boolean getAck() {
 		return ack;
 	}
 
-	public void setAck(String ack) {
+	public void setAck(boolean ack) {
 		this.ack = ack;
 	}
 	
