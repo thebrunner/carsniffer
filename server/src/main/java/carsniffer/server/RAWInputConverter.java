@@ -19,7 +19,7 @@ public class RAWInputConverter {
 			rawInputString += rawInput.get(i) ? "1" : "0";
 		}
 		if (length > 0) {
-			rawInputString += rawInput.get(rawInput.length()-1) ? "1" : "0";
+			rawInputString += rawInput.get(length-1) ? "1" : "0";
 		}
 		return rawInputString;
 	}
