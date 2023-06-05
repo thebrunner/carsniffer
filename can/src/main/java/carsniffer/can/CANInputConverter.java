@@ -60,16 +60,17 @@ public class CANInputConverter implements InputConverter {
 		final var data = rawInput.raw().get(startData, endData);
 
 		final var startCrc = endData;
-		final var endCrc = startAck;
+		final var endCrc = startCrc + 15;
+		final var crc = rawInput.raw().get(startCrc, endCrc);
 		
-		final var startAck = endAck - 2; // 1 bit
-		final var endAck = rawInput.length();
+		final var startAck = endCrc + 1; // delimiter
+		final var endAck = startCrc + 1;
 		final var ack = rawInput.raw().get(startAck, endAck);
 		
 		return new RAWCANMessage( //
 				new RAWInput(identifier, 11), //
 				new RAWInput(data, controlLengthInBit), //
-				new RAWInput(rawInput.raw().get(startCrc, endCrc), 16), //
+				new RAWInput(crc, 15), //
 				new RAWInput(ack, 1) //
 		);
 	}
