@@ -11,11 +11,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "survey")
-public class Survey implements Serializable {
+public class JpaInput implements Serializable {
 
 	private Long pk;
 
-	private String _name;
+	private String raw;
+	
+	private String converted;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,13 +30,22 @@ public class Survey implements Serializable {
 		this.pk = pk;
 	}
 	
-	@Column(name = "name")
-	public String getName() {
-		return this._name;
+	@Column(name = "raw")
+	public String getRaw() {
+		return this.raw;
 	}
 	
-	public void setName(final String name) {
-		this._name = name;
+	public void setRaw(final String raw) {
+		this.raw = raw;
 	}
 
+	@Column(name = "converted")
+	public String getConverted() {
+		return converted;
+	}
+
+	public void setConverted(String converted) {
+		this.converted = converted;
+	}
+	
 }
