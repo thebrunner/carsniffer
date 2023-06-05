@@ -16,8 +16,12 @@ public class JpaInput implements Serializable {
 	private Long pk;
 
 	private String raw;
-	
 	private String converted;
+	private String identifier;
+	private String data;
+	private String crc;
+	private String ack;
+	private Timestamp arrival;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,4 +52,49 @@ public class JpaInput implements Serializable {
 		this.converted = converted;
 	}
 	
+	@Column(name = "identifier")
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+	
+	@Column(name = "data", length = 8000)
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+	
+	@Column(name = "crc")
+	public String getCrc() {
+		return crc;
+	}
+
+	public void setCrc(String crc) {
+		this.crc = crc;
+	}
+	
+	@Column(name = "ack")
+	public String getAck() {
+		return ack;
+	}
+
+	public void setAck(String ack) {
+		this.ack = ack;
+	}
+	
+	
+	@Column(name = "arrival")
+	public Timestamp getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Timestamp arrival) {
+		this.arrival = arrival;
+	}
 }
