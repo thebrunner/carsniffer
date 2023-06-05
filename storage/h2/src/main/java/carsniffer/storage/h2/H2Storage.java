@@ -6,9 +6,13 @@ import carsniffer.server.CarSnifferException;
 import carsniffer.server.Input;
 import carsniffer.server.RAWInputConverter;
 import carsniffer.server.Storage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 public class H2Storage implements Storage {
 
+	private final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+	
 	private JpaInputRepository jpaInputRepository;
 
 	@Autowired
@@ -24,7 +28,7 @@ public class H2Storage implements Storage {
 	public JpaInput convert(Input input) {
 		final var jpaInput = new JpaInput();
 		jpaInput.setRaw(RAWInputConverter.rawInput2String(input.raw()));
-		jpaInput.setConverted(input.converted().toString());
+		jpaInput.setConverted(ow.writeValueAsString(input.converted()));
 		jpaInput.setIdentifier(input.converted().identifier());
 		jpaInput.setData(input.converted().data());
 		jpaInput.setCrc(input.converted().crc());
