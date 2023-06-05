@@ -31,7 +31,7 @@ public class CANBaseFrameConverter {
 		final var data = rawInput.raw().get(startData, endData);
 
 		final var startCrc = endData;
-		final var endCrc = startCrc + 15;
+		final var endCrc = startCrc + 16; // stuff bit end - 3
 		final var crc = rawInput.raw().get(startCrc, endCrc);
 		
 		final var startAck = endCrc + 1; // delimiter
