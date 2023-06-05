@@ -40,7 +40,7 @@ public class CANBaseFrameConverter {
 		final var endAck = startCrc + 1;
 		final var ack = rawInput.raw().get(startAck, endAck);
 		
-		return new RAWCANMessage( //
+		return RAWCANMessage.ofBaseFrame( //
 				new RAWInput(identifier, 11), //
 				new RAWInput(data, controlLengthInBit), //
 				new RAWInput(crc, 15), //
