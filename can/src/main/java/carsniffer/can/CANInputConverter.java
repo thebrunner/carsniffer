@@ -1,5 +1,7 @@
 package carsniffer.can;
 
+import java.util.BitSet;
+
 import carsniffer.server.CarSnifferException;
 import carsniffer.server.Input;
 import carsniffer.server.InputConverter;
@@ -14,34 +16,37 @@ public class CANInputConverter implements InputConverter {
 	@Override
 	public Input convert(RAWInput rawInput) throws CarSnifferException {
 
-		final boolean isExtendedFrame = rawInput.raw().get(14); --to boolean
+		final boolean isExtendedFrame = rawInput.raw().get(14);
 				   
 		final var rawCAN = isExtendedFrame ? extendedFrameConverter.convert(rawInput)
 			: baseFrameConverter.convert(rawInput);
 
 		return new Input(rawInput, new CANMessage(rawCAN, //
 				convertIdentifier(rawCAN.identifier()), //
-				convertIdentifier(rawCAN.extendedIdentifier()), //
+				convertExtendedIdentifier(rawCAN.extendedIdentifier()), //
 				convertData(rawCAN.data()), //
 				convertCrc(rawCAN.crc()), //
 				convertAck(rawCAN.ack()) //
 		));
 	}
 
-	public String convertAck(RAWInput ack) {
-		return RAWInputConverter.rawInput2String(ack);
+	public String convertIdentifier(BitSet identifier) {
+		return RAWInputConverter.bitSet2String(identifier, 11);
 	}
 
-	public String convertCrc(RAWInput crc) {
-		return RAWInputConverter.rawInput2String(crc);
+	public String convertExtendedIdentifier(BitSet identifier) {
+		return RAWInputConverter.bitSet2String(identifier, 18);
+	}
+	
+	public String convertData(BitSet data) {
+		return RAWInputConverter.bitSet2String(data, data.length());
 	}
 
-	public String convertData(RAWInput data) {
-		return RAWInputConverter.rawInput2String(data);
+	public String convertCrc(BitSet crc) {
+		return RAWInputConverter.bitSet2String(crc, 15);
 	}
 
-	public String convertIdentifier(RAWInput identifier) {
-		return RAWInputConverter.rawInput2String(identifier);
+	public String convertAck(BitSet ack) {
+		return RAWInputConverter.bitSet2String(ack, 1);
 	}
-
 }

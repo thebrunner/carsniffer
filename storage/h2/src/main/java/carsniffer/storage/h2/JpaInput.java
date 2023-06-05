@@ -1,6 +1,7 @@
 package carsniffer.storage.h2;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +19,7 @@ public class JpaInput implements Serializable {
 	private String raw;
 	private String converted;
 	private String identifier;
+	private String extendedIdentifier;
 	private String data;
 	private String crc;
 	private String ack;
@@ -59,6 +61,15 @@ public class JpaInput implements Serializable {
 
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
+	}
+	
+	@Column(name = "extended_identifier")
+	public String getExtendedIdentifier() {
+		return extendedIdentifier;
+	}
+	
+	public void setExtendedIdentifier(String extendedIdentifier) {
+		this.extendedIdentifier = extendedIdentifier;
 	}
 	
 	@Column(name = "data", length = 8000)

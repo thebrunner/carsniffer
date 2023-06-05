@@ -27,7 +27,7 @@ class ServerTest {
 	
 	@Test
 	void testReceive() throws Exception {
-		var b = new RAWInput(new BitSet(), 0);
+		var b = RAWInput.of(new BitSet(), 0);
 		var o = new Object();
 		var input = new Input(b, o);
 		

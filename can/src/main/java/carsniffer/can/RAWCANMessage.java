@@ -1,9 +1,10 @@
 package carsniffer.can;
 
-import carsniffer.server.RAWInput;
+import java.time.LocalDateTime;
+import java.util.BitSet;
 
-public record RAWCANMessage(RAWInput identifier, RAWInput extendedIdentifier, RAWInput data, RAWInput crc, RAWInput ack) {
-  public static RAWCANMessage ofBaseFrame(RAWInput identifier, RAWInput data, RAWInput crc, RAWInput ack) {
-    return new RAWCANMessage(identifier, new BitSet(), data, crc, ack);
+public record RAWCANMessage(BitSet identifier, BitSet extendedIdentifier, BitSet data, BitSet crc, BitSet ack, LocalDateTime arrival) {
+  public static RAWCANMessage ofBaseFrame(BitSet identifier, BitSet data, BitSet crc, BitSet ack, LocalDateTime arrival) {
+    return new RAWCANMessage(identifier, new BitSet(), data, crc, ack, arrival);
   }
 }
