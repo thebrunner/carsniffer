@@ -8,10 +8,12 @@ import carsniffer.server.RAWInputConverter;
 
 public class CANInputConverter implements InputConverter {
 
+	private final CANBaseFrameConverter baseFrameConverter = new CANBaseFrameConverter();
+	
 	@Override
 	public Input convert(RAWInput rawInput) throws CarSnifferException {
 
-		final var rawCAN = convert2RAWCANMessage(rawInput);
+		final var rawCAN = baseFrameConverter.convert(rawInput);
 
 		return new Input(rawInput, new CANMessage(rawCAN, //
 				convertIdentifier(rawCAN.identifier()), //
@@ -35,44 +37,6 @@ public class CANInputConverter implements InputConverter {
 
 	public String convertIdentifier(RAWInput identifier) {
 		return RAWInputConverter.rawInput2String(identifier);
-	}
-
-	public RAWCANMessage convert2RAWCANMessage(RAWInput rawInput) throws CarSnifferException {
-// BASE FRAME CAN A / CAN B
-		
-		final var startControl = 17;
-		final var endControl = 21;
-		final var control = rawInput.raw().get(startControl, endControl);
-		final int controlLengthInByte =  --controlToInt == length data
-		final int controlLengthInBit = controlLengthInByte + (controlLengthInByte * 8);
-		
-		if (rawInput.length() < 21 + controlLengthInBit + 16 + 2) {
-			throw new CarSnifferException(rawInput, "Input to short: length " + rawInput.length());
-		}
-
-		final var startIdentifier = 1;
-		final var endIdentifier = 13; // stuff bit 5 (index 4)
-		final var identifier = rawInput.raw().get(startIdentifier, endIdentifier);
-		-- delete bit 5 (index 4)
-
-		final var startData = endControl;
-		final var endData = startData + controlLengthInBit + 1;
-		final var data = rawInput.raw().get(startData, endData);
-
-		final var startCrc = endData;
-		final var endCrc = startCrc + 15;
-		final var crc = rawInput.raw().get(startCrc, endCrc);
-		
-		final var startAck = endCrc + 1; // delimiter
-		final var endAck = startCrc + 1;
-		final var ack = rawInput.raw().get(startAck, endAck);
-		
-		return new RAWCANMessage( //
-				new RAWInput(identifier, 11), //
-				new RAWInput(data, controlLengthInBit), //
-				new RAWInput(crc, 15), //
-				new RAWInput(ack, 1) //
-		);
 	}
 
 }
