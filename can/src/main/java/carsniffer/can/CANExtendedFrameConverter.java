@@ -10,7 +10,7 @@ public class CANExtendedFrameConverter extends CANBaseFrameConverter {
 		final var startControl = 34;
 		final var endControl = 38;
 		final var control = rawInput.raw().get(startControl, endControl);
-		final int controlLengthInByte = Long.valueOf(control.toLongArray()[0]).intValue();
+		final int controlLengthInByte = calcControlLengthInByte(control);
 		final int controlLengthInBit = controlLengthInByte + (controlLengthInByte * 8);
 
 		if (rawInput.length() < endControl + controlLengthInBit + 16 + 2) {
@@ -27,7 +27,7 @@ public class CANExtendedFrameConverter extends CANBaseFrameConverter {
 		final var extendedIdentifier = rawInput.raw().get(startExtendedIdentifier, endExtendedIdentifier);
 
 		final var startData = endControl;
-		final var endData = startData + controlLengthInBit + 1;
+		final var endData = startData + controlLengthInBit;
 		final var data = rawInput.raw().get(startData, endData);
 		for (int i = 0; i < controlLengthInByte; i++) {
 			removeStuff(data, 5 + (i * 8), controlLengthInBit);
