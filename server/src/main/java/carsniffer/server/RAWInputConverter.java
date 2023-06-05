@@ -6,7 +6,7 @@ public class RAWInputConverter {
 
 	public RAWInput convert(byte[] rawInput) {
 		final var result = BitSet.valueOf(rawInput);
-		return new RAWInput(result, rawInput.length);
+		return RAWInput.of(result, rawInput.length);
 	}
 	
 	public static String rawInput2String(RAWInput rawInput) {
