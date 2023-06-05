@@ -3,6 +3,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	
+<parent>
+	
+
+		<artifactId>spring-boot-starter-parent</artifactId>
+
+		<version>3.1.0</version>
+
+		<relativePath /> <!-- lookup parent from repository -->
+
+	</parent>
 	<groupId>carsniffer</groupId>
 	<artifactId>storage</artifactId>
 	<packaging>jar</packaging>
