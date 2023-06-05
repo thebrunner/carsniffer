@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "survey")
+@Table(name = "input")
 public class JpaInput implements Serializable {
 
 	private Long pk;
@@ -30,7 +30,7 @@ public class JpaInput implements Serializable {
 		this.pk = pk;
 	}
 	
-	@Column(name = "raw")
+	@Column(name = "raw", length = 8000)
 	public String getRaw() {
 		return this.raw;
 	}
@@ -39,7 +39,7 @@ public class JpaInput implements Serializable {
 		this.raw = raw;
 	}
 
-	@Column(name = "converted")
+	@Column(name = "converted", length = 8000)
 	public String getConverted() {
 		return converted;
 	}

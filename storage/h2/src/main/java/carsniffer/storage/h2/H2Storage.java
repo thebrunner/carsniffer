@@ -9,12 +9,16 @@ import carsniffer.server.Storage;
 
 public class H2Storage implements Storage {
 
-	@Autowired
-	private JpaInputRepository inputRepository;
+	private JpaInputRepository jpaInputRepository;
 
+	@Autowired
+	public H2Storage(JpaInputRepository jpaInputRepository) {
+		this.jpaInputRepository = jpaInputRepository;
+	}
+	
 	@Override
 	public void store(Input input) throws CarSnifferException {
-		inputRepository.save(convert(input));
+		jpaInputRepository.save(convert(input));
 	}
 
 	public JpaInput convert(Input input) {
