@@ -1,4 +1,4 @@
-package carsniffer.storage;
+package carsniffer.storage.h2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

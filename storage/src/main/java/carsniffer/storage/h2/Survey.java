@@ -1,4 +1,4 @@
-package carsniffer.storage;
+package carsniffer.storage.h2;
 
 import java.io.Serializable;
 
