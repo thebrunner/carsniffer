@@ -25,6 +25,11 @@ public class H2Storage implements Storage {
 		final var jpaInput = new JpaInput();
 		jpaInput.setRaw(RAWInputConverter.rawInput2String(input.raw()));
 		jpaInput.setConverted(input.converted().toString());
+		jpaInput.setIdentifier(input.converted().identifier());
+		jpaInput.setData(input.converted().data());
+		jpaInput.setCrc(input.converted().crc());
+		jpaInput.setAck(input.converted().ack());
+		jpaInput.setArrival(input.converted().arrival());
 		return jpaInput;
 	}
 
