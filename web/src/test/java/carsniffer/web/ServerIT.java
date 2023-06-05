@@ -18,7 +18,7 @@ class ServerIT {
 	void test() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
 	  			.post("/receive")
-	  			.content("0101"))
+	  			.param("rawInput", "10010"))
 		.andExpect(status().isOk());
 	}
 

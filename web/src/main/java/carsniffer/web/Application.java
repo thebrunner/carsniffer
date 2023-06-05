@@ -4,9 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import carsniffer.can.CANInputConverter;
+import carsniffer.server.CarSnifferException;
+import carsniffer.server.Input;
+import carsniffer.server.InputConverter;
+import carsniffer.server.RAWInput;
 import carsniffer.server.Server;
-import carsniffer.storage.DummyStorage;
+import carsniffer.server.Storage;
 
 @SpringBootApplication
 public class Application {
@@ -17,7 +20,18 @@ public class Application {
 
 	@Bean
 	public Server server() {
-		return new Server(new CANInputConverter(), new DummyStorage());
+		return new Server(new InputConverter() {
+			
+			@Override
+			public Input convert(RAWInput input) throws CarSnifferException {
+				return new Input(input, new Object());
+			}
+		}, new Storage() {
+			
+			@Override
+			public void store(Input input) throws CarSnifferException {
+			}
+		});
 	}
 
 }

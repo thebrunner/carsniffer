@@ -1,5 +1,5 @@
 package carsniffer.storage.h2;
 
-public class StorageTest {
+public class H2StorageTest {
 
 }
