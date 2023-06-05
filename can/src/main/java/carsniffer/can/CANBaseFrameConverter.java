@@ -29,10 +29,12 @@ public class CANBaseFrameConverter {
 		final var startData = endControl;
 		final var endData = startData + controlLengthInBit + 1;
 		final var data = rawInput.raw().get(startData, endData);
+		-- delete stuff bit immer das 6. Bit im Byte (pos 5)
 
 		final var startCrc = endData;
 		final var endCrc = startCrc + 16; // stuff bit end - 3
 		final var crc = rawInput.raw().get(startCrc, endCrc);
+		-- delete stuff bit end - 3
 		
 		final var startAck = endCrc + 1; // delimiter
 		final var endAck = startCrc + 1;
