@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import carsniffer.server.RAWInputConverter;
@@ -21,7 +22,7 @@ public class RESTController {
 	private RAWInputConverter inputConverter = new RAWInputConverter();
 
 	@PostMapping("/receive")
-	public ResponseEntity<?> receive(byte[] rawInput) {
+	public ResponseEntity<?> receive(@RequestBody byte[] rawInput) {
 		try {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Receiving: " + rawInput);
