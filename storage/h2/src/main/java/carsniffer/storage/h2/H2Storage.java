@@ -2,8 +2,6 @@ package carsniffer.storage.h2;
 
 import java.sql.Timestamp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import carsniffer.can.CANMessage;
 import carsniffer.server.CarSnifferException;
 import carsniffer.server.Input;
@@ -14,7 +12,6 @@ public class H2Storage implements Storage {
 	
 	private JpaInputRepository jpaInputRepository;
 
-	@Autowired
 	public H2Storage(JpaInputRepository jpaInputRepository) {
 		this.jpaInputRepository = jpaInputRepository;
 	}

@@ -8,7 +8,7 @@ import carsniffer.server.Input;
 import carsniffer.server.Storage;
 
 public class RESTStorage implements Storage {
-
+	
 	private final WebClient webClient = WebClient.create();
 	
 	private Config config;
@@ -24,6 +24,8 @@ public class RESTStorage implements Storage {
 				.uri(config.getUri()) //
 				.body(BodyInserters.fromValue(input)) //
 				.retrieve() //
+				.toBodilessEntity() //
+				.log() //
 		;
 	}
 
