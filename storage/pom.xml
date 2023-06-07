@@ -10,6 +10,7 @@
 
 	<modules>
 		<module>h2</module>
+		<module>rest</module>
 	</modules>
 
 	<properties>
