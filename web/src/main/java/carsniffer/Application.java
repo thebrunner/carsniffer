@@ -22,7 +22,10 @@ public class Application {
 	
 	@Bean
 	public Server server() {
-		return new Server(new CANInputConverter(), new H2Storage(jpaInputRepository));
+		return new Server( //
+			List.of(new CANInputConverter()), 
+			List.of(new H2Storage(jpaInputRepository)) //
+		);
 	}
 
 }
