@@ -1,5 +1,8 @@
 package carsniffer.storage.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -9,6 +12,8 @@ import carsniffer.server.Storage;
 
 public class RESTStorage implements Storage {
 	
+	private final static Logger LOGGER = LoggerFactory.getLogger(RESTStorage.class);
+
 	private final WebClient webClient = WebClient.create();
 	
 	private Config config;
@@ -25,7 +30,7 @@ public class RESTStorage implements Storage {
 				.body(BodyInserters.fromValue(input)) //
 				.retrieve() //
 				.onStatus(HttpStatusCode::isError, 
-					  error -> Mono.error(new CarSnifferException("Cannot send", error))) //
+					  error -> LOGGER.error("Cannot send", error)) //
 				.toBodilessEntity() //
 				.log() //
 		;
