@@ -13,7 +13,7 @@ import carsniffer.server.RAWInput;
 
 class CANExtendedFrameConverterTest {
 
-	CANBaseFrameConverter converter = new CANBaseFrameConverter();
+	CANExtendedFrameConverter converter = new CANExtendedFrameConverter();
 	
 	@Test
 	void testConvert() throws CarSnifferException {
