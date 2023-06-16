@@ -1,19 +1,36 @@
 package carsniffer.server;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Server {
 
-	private InputConverter inputConverter;
+	private final static Logger LOGGER = LoggerFactory.getLogger(Server.class);
+	
+	private Collection<InputConverter> inputConverter;
 
 	private Collection<Storage> storage;
 
-	public Server(InputConverter inputConverter, Collecction<Storage> storage) {
+	public Server(Collection<InputConverter> inputConverter, Collection<Storage> storage) {
 		this.inputConverter = inputConverter;
 		this.storage = storage;
 	}
 
 	public void receive(RAWInput rawInput) throws CarSnifferException {
-		final var input = inputConverter.convert(rawInput);
-		storage.foreach(s -> s.store(input));
+		inputConverter.forEach(ic -> {
+			try {
+				final var input = ic.convert(rawInput);
+				storage.forEach(s -> {
+					try {
+						s.store(input);
+					} catch (CarSnifferException e) {
+						LOGGER.error("Error storing with " + s.getClass().getSimpleName(), e);
+					}
+				});
+			} catch (CarSnifferException e) {
+				LOGGER.error("Error converting with " + s.getClass().getSimpleName(), e);
+			}
+		});
 	}
 
 }
