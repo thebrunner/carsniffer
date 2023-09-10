@@ -32,7 +32,7 @@ public class RESTStorage implements Storage {
 				.body(BodyInserters.fromValue(input)) //
 				.retrieve() //
 				.onStatus(HttpStatusCode::isError, 
-					  error -> Mono.error(new CarSnifferException("Cannot send: " + error)) //
+					  error -> Mono.error(new CarSnifferException("Cannot send: " + error))) //
 				.toBodilessEntity() //
 				.log() //
 		;
