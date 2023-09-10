@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.HttpStatusCode;
+import reactor.core.publisher.Mono;
 
 import carsniffer.server.CarSnifferException;
 import carsniffer.server.Input;
@@ -31,7 +32,7 @@ public class RESTStorage implements Storage {
 				.body(BodyInserters.fromValue(input)) //
 				.retrieve() //
 				.onStatus(HttpStatusCode::isError, 
-					  error -> LOGGER.error("Cannot send", error)) //
+					  error -> Mono.error(new CarSnifferException("Cannot send: " + error)) //
 				.toBodilessEntity() //
 				.log() //
 		;
