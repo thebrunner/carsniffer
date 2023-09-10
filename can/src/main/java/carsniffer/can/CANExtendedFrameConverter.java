@@ -15,7 +15,8 @@ public class CANExtendedFrameConverter extends CANBaseFrameConverter {
 
 		final var minLength = endControl + controlLengthInBit + 16 + 2;
 		if (rawInput.length() < minLength) {
-			throw new CarSnifferException(rawInput, "Input to short: length " + rawInput.length() + ", must be greater than " + );
+			throw new CarSnifferException(rawInput, "Input to short: length " + rawInput.length()
+						      + ", must be greater than " + minLength);
 		}
 
 		final var startIdentifier = 1;
