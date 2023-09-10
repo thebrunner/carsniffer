@@ -29,7 +29,7 @@ public class Server {
 					}
 				});
 			} catch (CarSnifferException e) {
-				LOGGER.error("Error converting with " + s.getClass().getSimpleName(), e);
+				LOGGER.error("Error converting", e);
 			}
 		});
 	}
