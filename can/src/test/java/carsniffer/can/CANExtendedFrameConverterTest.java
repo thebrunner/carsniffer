@@ -20,18 +20,18 @@ class CANExtendedFrameConverterTest {
 		var bitset = new BitSet();
 		bitset.set(5);
 		bitset.set(8);
-		bitset.set(10+18);
-		bitset.set(16+18);
-		bitset.set(20+18);
-		bitset.set(26+18);
-		bitset.set(29+18,33+18);
-		bitset.set(34+18,37+18);
-		bitset.set(38+18);
-		bitset.set(40+18);
-		bitset.set(43+18,47+18);
-		bitset.set(48+18,59+18);
+		bitset.set(10+17);
+		bitset.set(16+17);
+		bitset.set(20+17);
+		bitset.set(26+17);
+		bitset.set(29+17,33+17);
+		bitset.set(34+17,37+17);
+		bitset.set(38+17);
+		bitset.set(40+17);
+		bitset.set(43+17,47+17);
+		bitset.set(48+17,59+17);
 		
-		var rawInput = RAWInput.of(bitset, 58+18);
+		var rawInput = RAWInput.of(bitset, 58+17);
 		
 		var result = converter.convert(rawInput);
 		
