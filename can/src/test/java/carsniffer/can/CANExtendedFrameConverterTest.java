@@ -14,24 +14,24 @@ import carsniffer.server.RAWInput;
 class CANExtendedFrameConverterTest {
 
 	CANExtendedFrameConverter converter = new CANExtendedFrameConverter();
-	
+
 	@Test
 	void testConvert() throws CarSnifferException {
 		var bitset = new BitSet();
 		bitset.set(5);
 		bitset.set(8);
-		bitset.set(10);
-		bitset.set(16);
-		bitset.set(20);
-		bitset.set(26);
-		bitset.set(29,33);
-		bitset.set(34,37);
-		bitset.set(38);
-		bitset.set(40);
-		bitset.set(43,47);
-		bitset.set(48,59);
+		bitset.set(10+18);
+		bitset.set(16+18);
+		bitset.set(20+18);
+		bitset.set(26+18);
+		bitset.set(29+18,33+18);
+		bitset.set(34+18,37+18);
+		bitset.set(38+18);
+		bitset.set(40+18);
+		bitset.set(43+18,47+18);
+		bitset.set(48+18,59+18);
 		
-		var rawInput = RAWInput.of(bitset, 58);
+		var rawInput = RAWInput.of(bitset, 58+18);
 		
 		var result = converter.convert(rawInput);
 		
