@@ -2,8 +2,12 @@ package carsniffer.can;
 
 import carsniffer.server.CarSnifferException;
 import carsniffer.server.RAWInput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CANExtendedFrameConverter extends CANBaseFrameConverter {
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(CANExtendedFrameConverter.class);
 
 	public RAWCANMessage convert(RAWInput rawInput) throws CarSnifferException {
 
@@ -13,6 +17,10 @@ public class CANExtendedFrameConverter extends CANBaseFrameConverter {
 		final int controlLengthInByte = calcControlLengthInByte(control);
 		final int controlLengthInBit = controlLengthInByte + (controlLengthInByte * 8);
 
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("controlLengthInByte:" + controlLengthInByte);
+		}
+		
 		final var minLength = endControl + controlLengthInBit + 16 + 2;
 		if (rawInput.length() < minLength) {
 			throw new CarSnifferException(rawInput, "Input to short: length " + rawInput.length()
