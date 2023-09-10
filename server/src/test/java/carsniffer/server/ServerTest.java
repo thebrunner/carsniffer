@@ -22,11 +22,10 @@ class ServerTest {
 	@Mock
 	Storage storage;
 	
-	@InjectMocks
-	Server server;
-	
 	@Test
 	void testReceive() throws Exception {
+		var server = new Server(List.of(inputConverter), List.of(storage));
+		
 		var b = RAWInput.of(new BitSet(), 0);
 		var o = new Object();
 		var input = new Input(b, o);
