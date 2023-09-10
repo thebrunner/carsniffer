@@ -14,7 +14,10 @@ import carsniffer.server.RAWInput;
 class CANBaseFrameConverterTest {
 
 	CANBaseFrameConverter converter = new CANBaseFrameConverter();
-	
+
+	/**
+	 * 0000010010100000100010000010011110111010100111101111111111
+	 */
 	@Test
 	void testConvert() throws CarSnifferException {
 		var bitset = new BitSet();
