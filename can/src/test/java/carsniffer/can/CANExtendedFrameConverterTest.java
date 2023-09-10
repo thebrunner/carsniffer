@@ -15,7 +15,7 @@ class CANExtendedFrameConverterTest {
 
 	CANExtendedFrameConverter converter = new CANExtendedFrameConverter();
 	
-	//@Test TODO
+	@Test
 	void testConvert() throws CarSnifferException {
 		var bitset = new BitSet();
 		bitset.set(5);
