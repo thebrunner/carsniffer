@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.http.HttpStatusCode;
 
 import carsniffer.server.CarSnifferException;
 import carsniffer.server.Input;
