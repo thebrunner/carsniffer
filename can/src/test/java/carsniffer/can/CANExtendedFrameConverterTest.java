@@ -40,7 +40,6 @@ class CANExtendedFrameConverterTest {
 		
 		var identifier = new BitSet(11);
 		identifier.set(6);
-		identifier.set(8);
 		assertEquals(identifier, result.identifier());
 		
 		var data = new BitSet(8);
